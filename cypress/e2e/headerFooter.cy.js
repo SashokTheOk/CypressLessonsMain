@@ -18,7 +18,8 @@ before(() => {
   });
 
   it('should find all footer links and buttons', () => {
-      cy.get('app-home').find('#contactsSection').within(() => {
+      cy.get('app-root').scrollIntoView();
+      cy.get('#contactsSection').within(() => {
       cy.get('a, button').should('have.length.at.least', 1);
       cy.get('a, button').each(($el) => {
         cy.wrap($el).should('be.visible');
