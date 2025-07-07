@@ -149,8 +149,10 @@ describe('Registration form – full validation flow', () => {
     });
 
     it('не збігаються ⇒ "Passwords do not match"', () => {
-      cy.get('@password').type('StrongPass1');
-      cy.get('@confirmPassword').type('StrongPass2');
+      cy.get('@password').type('StrongPass1', { sensitive: true });
+
+      cy.get('@confirmPassword').type('StrongPass1', { sensitive: true });
+
       cy.get('@submit').click();
       cy.contains('Passwords do not match').should('be.visible');
     });
@@ -165,8 +167,10 @@ describe('Registration form – full validation flow', () => {
     cy.get('@firstName').type('John');
     cy.get('@lastName').type('Doe');
     cy.get('@email').type(`john.doe+${Date.now()}@example.com`);
-    cy.get('@password').type('StrongPass1');
-    cy.get('@confirmPassword').type('StrongPass1');
+    cy.get('@password').type('StrongPass1', { sensitive: true });
+
+    cy.get('@confirmPassword').type('StrongPass1', { sensitive: true });
+
 
     cy.get('@submit').should('not.be.disabled').click();
 
