@@ -166,10 +166,10 @@ describe('Registration form – full validation flow', () => {
 
     cy.get('@firstName').type('John');
     cy.get('@lastName').type('Doe');
-    cy.get('@email').type(`john.doe+${Date.now()}@example.com`);
-    cy.get('@password').type('StrongPass1', { sensitive: true });
+    cy.get('@email').type(`fedojaj863@fuasha.com`);
+    cy.get('@password').type('A12345678s', { sensitive: true });
 
-    cy.get('@confirmPassword').type('StrongPass1', { sensitive: true });
+    cy.get('@confirmPassword').type('A12345678s', { sensitive: true });
 
 
     cy.get('@submit').should('not.be.disabled').click();
@@ -180,9 +180,7 @@ describe('Registration form – full validation flow', () => {
   });
 });
 
-
-// ЛОГИНИТСЯ ОК
-//     it('should log-in with the registered user', () => {
-//     cy.get('.btn.btn-outline-white.header_signin').click();
-//     cy.login('fedojaj863@fuasha.com', 'A12345678s');
-// });
+it('should log-in with the registered user', () => {
+  cy.get('.btn.btn-outline-white.header_signin').click();
+  cy.login('fedojaj863@fuasha.com', 'A12345678s');
+});
