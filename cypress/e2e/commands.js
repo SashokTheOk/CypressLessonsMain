@@ -1,5 +1,5 @@
 Cypress.Commands.add('login', (username, password) => {
-  cy.get('#signinEmail').type('fedojaj863@fuasha.com');
+  cy.get('#signinEmail').type('fedojaj863@fuosha.com');
   cy.get('#signinPassword').type('A12345678s');
   cy.contains('Login').click();
 });

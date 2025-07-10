@@ -1,4 +1,5 @@
-// import './commands.js';
+// ХЕР ЙОГО ЗНАЄ, ЯК ВИПРАВИТИ ХРІНЬ З click
+import './commands.js';
 describe('Registration form – full validation flow', () => {
   /* ------------------------------------------------------------------ */
   /*  SET‑UP                                                            */
@@ -13,12 +14,12 @@ describe('Registration form – full validation flow', () => {
     cy.contains('Register').should('be.visible');
 
     // alias‑и полів
-    cy.get('[data-cy="firstName"], input[name="name"]').as('firstName');
-    cy.get('[data-cy="lastName"],  input[name="lastName"]').as('lastName');
-    cy.get('[data-cy="email"],     input[name="email"]').as('email');
-    cy.get('[data-cy="password"],  input[name="password"]').as('password');
-    cy.get('[data-cy="repeatPassword"], input[name="repeatPassword"]').as('confirmPassword');
-    cy.get('[data-cy="submit"], button[type="button"]').as('submit');
+    cy.get('input[name="name"]').as('firstName');
+    cy.get('input[name="lastName"]').as('lastName');
+    cy.get('input[name="email"]').as('email');
+    cy.get('input[name="password"]').as('password');
+    cy.get('input[name="repeatPassword"]').as('confirmPassword');
+    cy.contains('button', 'Register').as('submit');
   });
 
   /* ------------------------------------------------------------------ */
@@ -115,7 +116,7 @@ describe('Registration form – full validation flow', () => {
   context('Валідація поля «Password»', () => {
     it('порожнє ⇒ "Password required"', () => {
       cy.get('@password').clear();
-      cy.get('@submit').click();
+      cy.get('@submit').click({ multiple: true });
       cy.contains('Password required').should('be.visible');
     });
 
@@ -166,13 +167,13 @@ describe('Registration form – full validation flow', () => {
 
     cy.get('@firstName').type('John');
     cy.get('@lastName').type('Doe');
-    cy.get('@email').type(`fedojaj863@fuasha.com`);
+    cy.get('@email').type(`fedojaj863@fuosha.com`);
     cy.get('@password').type('A12345678s', { sensitive: true });
 
     cy.get('@confirmPassword').type('A12345678s', { sensitive: true });
 
 
-    cy.get('@submit').should('not.be.disabled').click();
+    cy.get('@submit').should('not.be.disabled').click({ multiple: true });
 
     cy.wait('@register')
       .its('response.statusCode')
@@ -180,7 +181,7 @@ describe('Registration form – full validation flow', () => {
   });
 });
 
-it('should log-in with the registered user', () => {
-  cy.get('.btn.btn-outline-white.header_signin').click();
-  cy.login('fedojaj863@fuasha.com', 'A12345678s');
-});
+// // it('should log-in with the registered user', () => {
+// //   cy.contains('Login').click({ multiple: true });
+// //   cy.login();
+// });

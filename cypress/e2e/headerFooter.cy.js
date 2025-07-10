@@ -17,13 +17,21 @@ describe('Header and Footer Elements', () => {
         });
     });
 
-    it('should find all footer links and buttons', () => {    
-        cy.get('app-home').find('#contactsSection').as('contactsSection');    
-        cy.get('@contactsSection').scrollIntoView();      
-        cy.get('@contactsSection').within(() => { 
+    it('should find all footer links and buttons', () => {
+        cy.get('#contactsSection')
+
+            .scrollIntoView()
+
+            .as('contactsSection');
+
+        cy.get('@contactsSection').within(() => {
+
             cy.get('a, button').should('have.length.at.least', 1);
+
             cy.get('a, button').each(($el) => {
+
                 cy.wrap($el).should('be.visible');
+
             });
         });
     });
